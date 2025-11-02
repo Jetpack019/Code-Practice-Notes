@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 function Idea() {
+  const [listData, setListData] = useState([]);
   const [titleChange, setTitleChange] = useState("");
   const [descriptionChange, setDescriptionChange] = useState("");
 
@@ -9,6 +10,12 @@ function Idea() {
   }
   function handleDescriptionChange(e) {
     setDescriptionChange(e.target.value);
+  }
+
+  function showListData(firstVal, secondVal) {
+    setListData((prevData) => {
+      return [...prevData, { title: firstVal, description: secondVal }];
+    });
   }
 
   return (
@@ -27,9 +34,16 @@ function Idea() {
         value={descriptionChange}
         onChange={handleDescriptionChange}
       />
-
+      <button onClick={() => showListData(titleChange, descriptionChange)}>
+        Show Items
+      </button>
       <p>{titleChange}</p>
       <p>{descriptionChange}</p>
+      {listData.map((data, index) => (
+        <li key={index}>
+          {data.title} {data.description}
+        </li>
+      ))}
     </div>
   );
 }
