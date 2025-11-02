@@ -16,7 +16,12 @@ function Idea() {
     setListData((prevData) => {
       return [...prevData, { title: firstVal, description: secondVal }];
     });
+    setTitleChange("");
+    setDescriptionChange("");
   }
+
+  const isDisabled =
+    titleChange.trim() === "" || descriptionChange.trim() === "";
 
   return (
     <div>
@@ -34,7 +39,10 @@ function Idea() {
         value={descriptionChange}
         onChange={handleDescriptionChange}
       />
-      <button onClick={() => showListData(titleChange, descriptionChange)}>
+      <button
+        onClick={() => showListData(titleChange, descriptionChange)}
+        disabled={isDisabled}
+      >
         Show Items
       </button>
       <p>{titleChange}</p>
