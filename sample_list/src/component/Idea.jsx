@@ -49,7 +49,7 @@ function Idea() {
       <p>{descriptionChange}</p>
       {listData.map((data, index) => (
         <li key={index}>
-          {data.title} {data.description}
+          {data.title} - {data.description}
         </li>
       ))}
     </div>
