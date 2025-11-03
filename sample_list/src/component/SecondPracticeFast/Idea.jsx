@@ -21,6 +21,7 @@ function Idea() {
   }
 
   const isDisabled = title.trim() === "" || description.trim() === "";
+  const winner = "Congratulations your a winner";
 
   return (
     <div>
@@ -40,7 +41,8 @@ function Idea() {
       </button>
       {data.map((dataval, index) => (
         <li key={index}>
-          {dataval.title} - {dataval.description}
+          {dataval.title === "congrats" ? winner : dataval.title}
+          {dataval.description}
         </li>
       ))}
     </div>
