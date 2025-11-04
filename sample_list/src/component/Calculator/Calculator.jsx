@@ -4,34 +4,40 @@ import classes from "./Calculator.module.css";
 function Calculator() {
   const [numCal, setNumCal] = useState([]);
   const [totalVal, setTotalVal] = useState(0);
+  const [operation, setOperation] = useState(null);
 
   function handleNumVal(numvalue) {
     setNumCal((prevNum) => [...prevNum, numvalue]);
   }
 
-  function totalValCompute(operation_Value) {
+  function handleOperation(op) {
     const currentNum = Number(numCal.join(""));
-
-    setTotalVal((prevVal) => {
-      if (operation_Value === "+") {
-        return prevVal + currentNum;
-      }
-      if (operation_Value === "-") {
-        return prevVal - currentNum;
-      }
-      if (operation_Value === "x") {
-        return prevVal * currentNum;
-      }
-      if (operation_Value === "/") {
-        return prevVal / currentNum;
-      }
-      if (operation_Value === "=") {
-        return prevVal / currentNum;
-      }
-      return prevVal;
-    });
-
+    if (totalVal === 0) {
+      setTotalVal(currentNum);
+    } else if (operation) {
+      if (operation === "+") setTotalVal((prev) => prev + currentNum);
+      if (operation === "-") setTotalVal((prev) => prev - currentNum);
+      if (operation === "x") setTotalVal((prev) => prev * currentNum);
+      if (operation === "/") setTotalVal((prev) => prev / currentNum);
+    }
     setNumCal([]);
+    setOperation(op);
+  }
+
+  function handleEqual() {
+    const currentNum = Number(numCal.join(""));
+    if (operation === "+") setTotalVal((prev) => prev + currentNum);
+    if (operation === "-") setTotalVal((prev) => prev - currentNum);
+    if (operation === "x") setTotalVal((prev) => prev * currentNum);
+    if (operation === "/") setTotalVal((prev) => prev / currentNum);
+    setNumCal([]);
+    setOperation(null);
+  }
+
+  function handleClear() {
+    setNumCal([]);
+    setOperation(null);
+    setTotalVal(0);
   }
 
   return (
@@ -39,11 +45,12 @@ function Calculator() {
       <p>{numCal.join("")}</p>
       <p>{totalVal}</p>
       <div className={classes.container}>
-        <button onClick={() => totalValCompute("+")}>+</button>
-        <button onClick={() => totalValCompute("-")}>-</button>
-        <button onClick={() => totalValCompute("x")}>x</button>
-        <button onClick={() => totalValCompute("/")}>/</button>
-        <button onClick={() => totalValCompute("=")}>/</button>
+        <button onClick={() => handleOperation("+")}>+</button>
+        <button onClick={() => handleOperation("-")}>-</button>
+        <button onClick={() => handleOperation("x")}>x</button>
+        <button onClick={() => handleOperation("/")}>/</button>
+        <button onClick={handleEqual}>=</button>{" "}
+        <button onClick={handleClear}>Clear</button>
         <button onClick={() => handleNumVal(1)}>1</button>
         <button onClick={() => handleNumVal(2)}>2</button>
         <button onClick={() => handleNumVal(3)}>3</button>
