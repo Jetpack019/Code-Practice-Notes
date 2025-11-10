@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
+import AccountLoginForm from "./AccountLoginForm";
 
 function AccountLogin() {
   const [user, setUser] = useState(null);
@@ -46,12 +47,15 @@ function AccountLogin() {
           </button>
         </>
       ) : (
-        <button
-          onClick={handleGoogleSignIn}
-          className="bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-semibold px-4 py-2 rounded-md"
-        >
-          Sign in with Google
-        </button>
+        <div>
+          <AccountLoginForm />
+          <button
+            onClick={handleGoogleSignIn}
+            className="bg-cyan-500 hover:bg-cyan-400 text-gray-900 font-semibold px-4 py-2 rounded-md"
+          >
+            Sign in with Google
+          </button>
+        </div>
       )}
     </div>
   );
