@@ -1,13 +1,15 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import UserForm from "./component/UserForm";
+import UserProvider from "./component/UserProvider";
+import SampleContext from "./component/SampleContext";
 
 function App() {
   return (
     <>
-      <UserForm />
+      <UserProvider>
+        <UserForm />
+        <SampleContext />
+      </UserProvider>
     </>
   );
 }

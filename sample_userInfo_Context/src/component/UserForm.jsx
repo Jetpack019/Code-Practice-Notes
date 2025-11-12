@@ -1,39 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "./UserProvider";
 
 function UserForm() {
-  const [data, setData] = useState([]);
+  const { data, setData } = useContext(UserContext);
   const [user, setUser] = useState("");
   const [description, setDescription] = useState("");
 
   function handleUserChange(e) {
     setUser(e.target.value);
   }
+
   function handleDescriptionChange(e) {
     setDescription(e.target.value);
   }
 
-  function userInfoSubmit(firstVal, secondVal) {
-    setData((prevData) => {
-      return [...prevData, { firstVal: user, secondVal: description }];
-    });
+  function userInfoSubmit() {
+    if (!user || !description) return;
+    setData((prev) => [...prev, { user, description }]);
+    setUser("");
+    setDescription("");
   }
 
   return (
     <div>
-      <form action="">
+      <div>
         <p>UserName</p>
-        <input type="text" onChange={handleUserChange} />
+        <input type="text" value={user} onChange={handleUserChange} />
         <p>Description</p>
-        <input type="text" onChange={handleDescriptionChange} />
-        <button type="submit" onClick={() => userInfoSubmit(user, description)}>
-          Submit
-        </button>
-      </form>
-      {data.map((userData, index) => (
-        <li key={index}>
-          {userData.user} , {userData.description}
-        </li>
-      ))}
+        <input
+          type="text"
+          value={description}
+          onChange={handleDescriptionChange}
+        />
+        <button onClick={userInfoSubmit}>Submit</button>
+      </div>
     </div>
   );
 }
