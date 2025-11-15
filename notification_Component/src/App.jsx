@@ -4,9 +4,16 @@ import "./App.css";
 import { Bell } from "lucide-react";
 import Modal_Notification from "./Component/Modal_Notification";
 
+const notification = [
+  "Hello how is your day",
+  "Nice Game previosly",
+  "Goodluck next game",
+];
+
 function App() {
   const [info, setInfo] = useState(false);
-  const [notifCount, setNotifCount] = useState(3);
+  const [notifCount, setNotifCount] = useState(notification.length);
+
   function showInfo() {
     setInfo(!info);
   }
@@ -14,9 +21,9 @@ function App() {
     <>
       <div>
         <button onClick={showInfo}>
-          <Bell />
+          <Bell /> {notifCount}
         </button>
-        {info && <Modal_Notification count={notifCount} />}
+        {info && <Modal_Notification messages={notification} />}
       </div>
     </>
   );
