@@ -1,9 +1,9 @@
 import React from "react";
-
-function Modal_Notification() {
+import classes from "./Modal_Notification.module.css";
+function Modal_Notification({ count }) {
   return (
-    <div>
-      <li>This is a message for you</li>
+    <div className={classes.notification}>
+      <p>You have {count} notifications</p>
     </div>
   );
 }

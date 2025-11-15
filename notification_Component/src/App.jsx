@@ -1,19 +1,22 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
+import { Bell } from "lucide-react";
 import Modal_Notification from "./Component/Modal_Notification";
 
 function App() {
   const [info, setInfo] = useState(false);
-
+  const [notifCount, setNotifCount] = useState(3);
   function showInfo() {
-    <Modal_Notification />;
+    setInfo(!info);
   }
   return (
     <>
       <div>
-        <button onClick={showInfo}>{<Bell />} </button>
+        <button onClick={showInfo}>
+          <Bell />
+        </button>
+        {info && <Modal_Notification count={notifCount} />}
       </div>
     </>
   );
