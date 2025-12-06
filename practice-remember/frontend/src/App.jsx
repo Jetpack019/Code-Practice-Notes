@@ -1,10 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function App() {
-  return <></>;
+  const [data, setData] = useState("");
+  useEffect(() => {
+    fetch("http://localhost:3000/")
+      .then((response) => response.text().then((text) => setData(text)))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+  return (
+    <>
+      <p>{data}</p>
+    </>
+  );
 }
 
 export default App;
